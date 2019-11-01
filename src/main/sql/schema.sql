@@ -56,5 +56,5 @@ CREATE TABLE `success_kill` (
 -- ----------------------------
 -- Records of success_kill
 -- ----------------------------
-INSERT INTO `success_kill` VALUES ('1001', '15588537323', '0', '2019-10-30 14:50:40');
+INSERT INTO `success_kill` VALUES ('1001', '13488887777', '0', '2019-10-30 14:50:40');
 INSERT INTO `success_kill` VALUES ('1001', '18005385482', '0', '2019-10-30 14:50:40');
