@@ -10,7 +10,7 @@ BEGIN
     DECLARE insert_count INT DEFAULT 0;
     START TRANSACTION;
     INSERT IGNORE INTO success_kill
-    (seckill_id, user_phone, create_time)
+    (seckill_id, user_phone,create_time)
     VALUES
     (v_seckill_id,v_phone,v_kill_time);
     SELECT ROW_COUNT() INTO insert_count;
@@ -22,15 +22,15 @@ BEGIN
         SET r_result = -2;
     ELSE
         UPDATE seckill SET number = number-1
-        WHERE seckill_id = seckill_id
-          AND end_time > v_kill_time
-          AND start_time < v_kill_time
-          AND number>1;
+        WHERE seckill_id = v_seckill_id
+          AND end_time >= v_kill_time
+          AND start_time <= v_kill_time
+          AND number > 0;
         SELECT ROW_COUNT() INTO insert_count;
         IF(insert_count=0) THEN
             ROLLBACK ;
             SET r_result=0;
-        ELSEIF (insert_count<0) THEN
+        ELSEIF (insert_count < 0) THEN
             ROLLBACK ;
             SET r_result = -2;
         ELSE
@@ -38,7 +38,7 @@ BEGIN
             SET r_result=1;
         END IF ;
     END IF ;
-END ;
+END;
 $$
 -- 存储过程结束
 
