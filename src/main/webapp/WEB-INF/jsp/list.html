@@ -44,7 +44,7 @@
                         <td th:text="${#dates.format(li.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                         <td>
                             <!--/*-->th:href="@{/seckill/{id}/detail(id=${li.seckillId})}<!--*/-->
-                            <a href="#" th:href="@{/{id}/detail(id=${li.seckillId})}" target="_blank" class="btn btn-info">link</a>
+                            <a href="#" th:href="@{/{id}/detail(id=${li.seckillId})}" class="btn btn-info">link</a>
                         </td>
                     </tr>
                 </tbody>

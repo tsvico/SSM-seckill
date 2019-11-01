@@ -14,3 +14,7 @@
 
 ### 秒杀接口优化
 ![](https://i.loli.net/2019/10/30/zox9MZHqgcUneJC.png)
+### 架构工作流程分析
+![](https://i.loli.net/2019/11/01/ERcVNnuGdW2TLMq.png)
+
+![](https://i.loli.net/2019/11/01/kylVrapAeSZ4xut.png)
