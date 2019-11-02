@@ -92,7 +92,10 @@ public class SeckillServiceImpl implements SeckillService {
         //System.out.println(nowTime);
         if (nowTime.getTime() < startTime.getTime() || nowTime.getTime() > endTime.getTime()) {
             return new Exposer(false, seckillId, nowTime.getTime(), startTime.getTime(), endTime.getTime());
-
+        }
+        //库存判断
+        if (seckill.getNumber()==0){
+            return new Exposer(false, seckillId, false);
         }
         String md5 = getMd5(seckillId);
         return new Exposer(true, md5, seckillId);
@@ -111,7 +114,7 @@ public class SeckillServiceImpl implements SeckillService {
      * 2.保证事务方法的执行时间尽可能短,不要穿插其他RPC/HTTP请求
      * 3.不是所有的方法都需要事务，如只有一条修改操作，只读操作不需要事务控制
      */
-    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
+    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException {
         if (md5 == null || !md5.equals(getMd5(seckillId))) {
             throw new SeckillException("seckill data rewrite");
         }
@@ -147,7 +150,7 @@ public class SeckillServiceImpl implements SeckillService {
 
 
     @Override
-    public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
+    public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) throws SeckillException {
         if (md5 == null || !md5.equals(getMd5(seckillId))) {
             return new SeckillExecution(seckillId, SeckillStatEnum.DATA_REWRITE);
         }
@@ -165,6 +168,14 @@ public class SeckillServiceImpl implements SeckillService {
             if (result == 1) {
                 SuccessKilled sk = successKilledDao.
                         queryByIdWithSeckill(seckillId, userPhone);
+
+                /**
+                 * 更新redis缓存中库存数量
+                 */
+                Seckill seckill = redisDao.getSeckill(seckillId);
+                seckill.setNumber(seckill.getNumber()-1);
+                redisDao.putSeckill(seckill);
+
                 return new SeckillExecution(seckillId, SeckillStatEnum.SUCCESS, sk);
             } else {
                 return new SeckillExecution(seckillId, SeckillStatEnum.stateOf(result));

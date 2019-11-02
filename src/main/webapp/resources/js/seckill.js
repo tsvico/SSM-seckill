@@ -16,7 +16,7 @@ var seckill = {
     handleSeckillkill: function (seckillId, node) {
         //处理秒杀逻辑
         node.hide()
-            .html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀</button>')
+            .html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀</button>');
         $.ajax({
             url: seckill.URL.exposer(seckillId),
             type: 'post',
@@ -51,7 +51,15 @@ var seckill = {
                         var now = exposer.now;
                         var start = exposer.start;
                         var end = exposer.end; //重新计算计时逻辑
-                        seckill.countdown(seckillId, now, start, end);
+                        var havinventory = exposer.havinventory;
+                        if (havinventory){
+                            //还有库存
+                            seckill.countdown(seckillId, now, start, end);
+                        }else {
+                            //库存为0
+                            node.html('<span class="label label-warning">秒杀结束</span>'); //显示秒杀结果
+                            node.show();
+                        }
                     }
                 } else {
                     console.log("result:" + result);

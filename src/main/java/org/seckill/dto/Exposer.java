@@ -18,6 +18,8 @@ public class Exposer {
     private long start; //开启时间
     private long end; //结束时间
 
+    private boolean havinventory=true; //是否还有库存 优先级小于时间
+
     public Exposer(boolean exposed, String md5, long seckillId) {
         this.exposed = exposed;
         this.md5 = md5;
@@ -35,6 +37,12 @@ public class Exposer {
     public Exposer(boolean exposed, long seckillId) {
         this.exposed = exposed;
         this.seckillId = seckillId;
+    }
+
+    public Exposer(boolean exposed, long seckillId, boolean havinventory) {
+        this.exposed = exposed;
+        this.seckillId = seckillId;
+        this.havinventory = havinventory;
     }
 
     public boolean isExposed() {
@@ -85,6 +93,14 @@ public class Exposer {
         this.end = end;
     }
 
+    public boolean isHavinventory() {
+        return havinventory;
+    }
+
+    public void setHavinventory(boolean havinventory) {
+        this.havinventory = havinventory;
+    }
+
     @Override
     public String toString() {
         return "Exposer{" +
@@ -94,6 +110,7 @@ public class Exposer {
                 ", now=" + now +
                 ", start=" + start +
                 ", end=" + end +
+                ", havinventory=" + havinventory +
                 '}';
     }
 }
