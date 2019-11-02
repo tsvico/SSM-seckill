@@ -30,7 +30,7 @@ var seckill = {
                         //获取秒杀地址
                         var md5 = exposer.md5;
                         var killUrl = seckill.URL.execution(seckillId, exposer.md5);
-                        console.log("killUrl:" + killUrl);
+                        //console.log("killUrl:" + killUrl);
                         //绑定一次点击事件
                         $('#killBtn').one('click', function () {
                             //执行秒杀请求
@@ -57,7 +57,7 @@ var seckill = {
                             seckill.countdown(seckillId, now, start, end);
                         }else {
                             //库存为0
-                            node.html('<span class="label label-warning">秒杀结束</span>'); //显示秒杀结果
+                            node.html('秒杀结束'); //显示秒杀结果
                             node.show();
                         }
                     }
