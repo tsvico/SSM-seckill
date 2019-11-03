@@ -30,7 +30,7 @@
                     <th>库存</th>
                     <th>开始时间</th>
                     <th>结束时间</th>
-                    <th>创建时间</th>
+                    <!--/*--><th>创建时间</th><!--*/-->
                     <th>详情页</th>
                 </tr>
                 </thead>
@@ -41,7 +41,7 @@
                         <td th:text="${li.number}"></td>
                         <td th:text="${#dates.format(li.startTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                         <td th:text="${#dates.format(li.endTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-                        <td th:text="${#dates.format(li.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <!--/*--><td th:text="${#dates.format(li.createTime,'yyyy-MM-dd HH:mm:ss')}"></td><!--*/-->
                         <td>
                             <!--/*-->th:href="@{/seckill/{id}/detail(id=${li.seckillId})}<!--*/-->
                             <a href="#" th:href="@{/{id}/detail(id=${li.seckillId})}" class="btn btn-info">link</a>
@@ -55,8 +55,8 @@
 
 </body>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 </html>
