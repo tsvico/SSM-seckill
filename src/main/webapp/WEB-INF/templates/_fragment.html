@@ -12,6 +12,25 @@
     <![endif]-->
 </head>
 <body>
+<nav th:fragment="nav" class="top ">
+    <a href="#nowhere">
+        <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon glyphicon-home redColor"></span>
+        天猫首页
+    </a>
+
+    <span>喵，欢迎来天猫</span>
+
+    <a href="#nowhere">tmalltest</a>
+    <a href="#nowhere">退出</a>
+
+    <span class="pull-right">
+			<a href="#nowhere">我的订单</a>
+			<a href="#nowhere">
+			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
+			购物车<strong>5</strong>件</a>
+		</span>
+
+</nav>
 <th:block th:fragment="script">
     <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
     <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
