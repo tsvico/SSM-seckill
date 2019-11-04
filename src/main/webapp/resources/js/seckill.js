@@ -85,7 +85,7 @@ var seckill = {
         } else if (nowTime < startTime) {
             console.log('秒杀未开始');
             //秒杀未开始,计时事件绑定
-            var killTime = new Date(startTime + 1000); //加1秒，防止计时过程中时间偏移
+            var killTime = new Date(startTime + wc); //加1秒，防止计时过程中时间偏移
             seckillBox.countdown(killTime, function (event) {
                 //时间的格式
                 var format = event.strftime('秒杀倒计时：%D天%H时%M分%S秒');
@@ -142,6 +142,7 @@ var seckill = {
                 success: function (res) {
                     if (res && res.success) {
                         var nowTime = res.data;
+                        wc = new Date().getTime()-nowTime;
                         seckill.countdown(seckillId, nowTime, startTime, endTime);
                     }
                 }

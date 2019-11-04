@@ -26,6 +26,8 @@
         <property name="checkoutTimeout" value="10000"/>
         <!--重试次数-->
         <property name="acquireRetryAttempts" value="2"/>
+        <property name="testConnectionOnCheckin" value="false"/>
+        <property name="testConnectionOnCheckout" value="true"/>
     </bean>
 
     <!--约定大于配置-->
