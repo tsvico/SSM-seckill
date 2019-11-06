@@ -59,6 +59,12 @@ var seckill = {
                                             break;
                                     }
                                     node.html('<button class="btn ' + tempClass + '">' + stateInfo + '</button>'); //显示秒杀结果
+                                    if (state===1){
+                                        layer.msg("请稍后");
+                                        setTimeout(function(){
+                                            location.href = "shopping";
+                                        },1000)
+                                    }
                                 } else {
                                     layer.msg(result.error);
                                 }

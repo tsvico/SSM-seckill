@@ -58,6 +58,17 @@
     -->
     <mvc:default-servlet-handler/>
 
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!--使用bean直接定义在<mvc:interceptors>下面的拦截器将拦截所有请求-->
+        <!--<bean class="org.seckill.interceptor.LoginInterceptor"/>-->
+        <!-- 拦截器1 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**" />
+            <bean class="org.seckill.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 3.配置jsp 显示ViewResolver -->
     <!--
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -408,11 +408,12 @@ div.simpleLogo {
 
 img.loginBackgroundImg {
     display: block;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 div.loginDivInProductPageModalDiv {
     width: 350px;
+    top: 15%;
 }
 
 div.deleteConfirmModalDiv {

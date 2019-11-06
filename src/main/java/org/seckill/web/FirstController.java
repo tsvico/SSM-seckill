@@ -38,6 +38,7 @@ public class FirstController {
         System.out.println("请求List");
         return "tmalllist";
     }
+
     @GetMapping("/{seckillId}/detail2")
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
         if (seckillId == null)
@@ -50,5 +51,13 @@ public class FirstController {
         model.addAttribute("goods", goods);
         model.addAttribute("seckill", seckill);
         return "tmalldetail";
+    }
+    @GetMapping("/{seckillId}/shopping")
+    public String shoping(@PathVariable("seckillId") Long seckillId, Model model) {
+        if (seckillId == null)
+            return "redirect:/list2";
+        Goods goods = goodsService.GetById(seckillId);
+        model.addAttribute("goods", goods);
+        return "tmallshopping";
     }
 }

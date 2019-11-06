@@ -13,75 +13,26 @@
 <body>
 
 <nav th:replace="_fragment::nav" class="top">
-    <a href="#nowhere">
+    <a href="javascript:void(0);">
         <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon glyphicon-home redColor"></span>
         天猫首页
     </a>
 
     <span>喵，欢迎来天猫</span>
 
-    <a href="#nowhere">tmalltest</a>
-    <a href="#nowhere">退出</a>
+    <a href="javascript:void(0);">tmalltest</a>
+    <a href="javascript:void(0);">退出</a>
 
     <span class="pull-right">
-			<a href="#nowhere">我的订单</a>
-			<a href="#nowhere">
+			<a href="javascript:void(0);">我的订单</a>
+			<a href="javascript:void(0);">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
 			购物车<strong>5</strong>件</a>		
 		</span>
 
 </nav>
 
-<div>
-    <a href="#nowhere">
-        <img id="simpleLogo" class="simpleLogo" src="http://how2j.cn/tmall/img/site/simpleLogo.png">
-    </a>
-
-    <form method="post">
-        <div class="simpleSearchDiv pull-right">
-            <input type="text" placeholder="平衡车 原汁机" name="keyword">
-            <button class="searchButton" type="button">搜天猫</button>
-            <div class="searchBelow">
-			
-					<span>
-						<a href="#nowhere">
-							冰箱
-						</a>
-										
-							<span>|</span>				
-						
-					</span>
-
-                <span>
-						<a href="#nowhere">
-							空调
-						</a>
-										
-							<span>|</span>				
-						
-					</span>
-
-                <span>
-						<a href="#nowhere">
-							女表
-						</a>
-										
-							<span>|</span>				
-						
-					</span>
-
-                <span>
-						<a href="#nowhere">
-							男表
-						</a>
-						
-					</span>
-
-            </div>
-        </div>
-    </form>
-    <div style="clear:both"></div>
-</div>
+<div th:replace="_fragment::search"></div>
 
 <div class="categoryPictureInProductPageDiv">
     <img class="categoryPictureInProductPage" src="http://how2j.cn/tmall/img/category/68.jpg">
@@ -118,54 +69,6 @@
                 if (num <= 0)
                     num = 1;
                 $(".productNumberSetting").val(num);
-            });
-
-            $(".addCartLink").click(function () {
-                var page = "forecheckLogin";
-                if (false) $.get(
-                    page,
-                    function (result) {
-                        if ("success" == result) {
-                            var pid = 819;
-                            var num = $(".productNumberSetting").val();
-                            var addCartpage = "foreaddCart";
-                            if (false) $.get(
-                                addCartpage,
-                                {"pid": pid, "num": num},
-                                function (result) {
-                                    if ("success" == result) {
-                                        $(".addCartButton").html("已加入购物车");
-                                        $(".addCartButton").attr("disabled", "disabled");
-                                        $(".addCartButton").css("background-color", "lightgray");
-                                        $(".addCartButton").css("border-color", "lightgray");
-                                        $(".addCartButton").css("color", "black")
-
-                                    } else {
-
-                                    }
-                                }
-                            );
-                        } else {
-                            $("#loginModal").modal('hide');
-                        }
-                    }
-                );
-                return false;
-            });
-            $(".buyLink").click(function () {
-                var page = "forecheckLogin";
-                if (false) $.get(
-                    page,
-                    function (result) {
-                        if ("success" == result) {
-                            var num = $(".productNumberSetting").val();
-                            location.href = $(".buyLink").attr("href") + "&num=" + num;
-                        } else {
-                            $("#loginModal").modal('hide');
-                        }
-                    }
-                );
-                return false;
             });
 
             $("img.smallImage").mouseenter(function () {
@@ -257,17 +160,17 @@
                 <span>数量</span>
                 <span>
 				<span class="productNumberSettingSpan">
-				<input class="productNumberSetting" type="text" value="1">
+				<input style="font-size:16px;" class="productNumberSetting" type="text" value="1">
 				</span>
 				<span class="arrow">
-					<a href="#nowhere" class="increaseNumber">
+					<a href="javascript:void(0);" class="increaseNumber">
 					<span class="updown">
 							<img src="http://how2j.cn/tmall/img/site/increase.png">
 					</span>
 					</a>
 					
 					<span class="updownMiddle"> </span>
-					<a href="#nowhere" class="decreaseNumber">
+					<a href="javascript:void(0);" class="decreaseNumber">
 					<span class="updown">
 							<img src="http://how2j.cn/tmall/img/site/decrease.png">
 					</span>
@@ -281,10 +184,10 @@
             <div class="serviceCommitment">
                 <span class="serviceCommitmentDesc">服务承诺</span>
                 <span class="serviceCommitmentLink">
-				<a href="#nowhere">正品保证</a>
-				<a href="#nowhere">极速退款</a>
-				<a href="#nowhere">赠运费险</a>
-				<a href="#nowhere">七天无理由退换</a>
+				<a href="javascript:void(0);">正品保证</a>
+				<a href="javascript:void(0);">极速退款</a>
+				<a href="javascript:void(0);">赠运费险</a>
+				<a href="javascript:void(0);">七天无理由退换</a>
 			</span>
             </div>
 
@@ -305,8 +208,8 @@
 
     <div class="productReviewDiv">
         <div class="productReviewTopPart">
-            <a href="#nowhere" class="productReviewTopPartSelectedLink">商品详情</a>
-            <a href="#nowhere" class="selected">累计评价 <span class="productReviewTopReviewLinkNumber">19</span> </a>
+            <a href="javascript:void(0);" class="productReviewTopPartSelectedLink">商品详情</a>
+            <a href="javascript:void(0);" class="selected">累计评价 <span class="productReviewTopReviewLinkNumber">19</span> </a>
         </div>
 
         <div class="productReviewContentPart">
@@ -640,8 +543,8 @@
 
     <div class="productDetailDiv">
         <div class="productDetailTopPart">
-            <a href="#nowhere" class="productDetailTopPartSelectedLink selected">商品详情</a>
-            <a href="#nowhere" class="productDetailTopReviewLink">累计评价 <span
+            <a href="javascript:void(0);" class="productDetailTopPartSelectedLink selected">商品详情</a>
+            <a href="javascript:void(0);" class="productDetailTopReviewLink">累计评价 <span
                     class="productDetailTopReviewLinkNumber">19</span> </a>
         </div>
 
@@ -714,8 +617,8 @@
                         <input id="password" name="password" class="form-control" type="password" placeholder="密码">
                     </div>
                     <div>
-                        <a href="#nowhere">忘记登录密码</a>
-                        <a href="#nowhere" class="pull-right">免费注册</a>
+                        <a href="javascript:void(0);">忘记登录密码</a>
+                        <a href="javascript:void(0);" class="pull-right">免费注册</a>
                     </div>
                     <div style="margin-top:20px">
                         <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
