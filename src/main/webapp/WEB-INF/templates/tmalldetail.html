@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <title th:text="${'秒杀'+goods.goodsname}">模仿天猫官网 名媛2016新款女装夏两件套裤韩版雪纺七分裤阔腿裤休闲时尚套装女</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
     <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
     <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +83,6 @@
     <div style="clear:both"></div>
 </div>
 
-<title>模仿天猫官网 名媛2016新款女装夏两件套裤韩版雪纺七分裤阔腿裤休闲时尚套装女</title>
 <div class="categoryPictureInProductPageDiv">
     <img class="categoryPictureInProductPage" src="http://how2j.cn/tmall/img/category/68.jpg">
 </div>
@@ -172,7 +172,7 @@
                 var name = $("#name").val();
                 var password = $("#password").val();
 
-                if (0 == name.length || 0 == password.length) {
+                if (0 === name.length || 0 === password.length) {
                     $("span.errorMessage").html("请输入账号密码");
                     $("div.loginErrorMessageDiv").show();
                     return false;
@@ -217,45 +217,40 @@
         });
 
     </script>
-
+    <!--/*@thymesVar id="goods" type="org.seckill.entity.Goods"*/-->
     <div class="imgAndInfo">
 
         <div class="imgInimgAndInfo">
-            <img src="http://how2j.cn/tmall/img/productSingle/8620.jpg" class="bigImg">
-            <div class="smallImageDiv">
 
+            <img src="http://how2j.cn/tmall/img/productSingle/8620.jpg" th:src="${goods.images1}" class="bigImg">
+            <div class="smallImageDiv">
                 <img src="http://how2j.cn/tmall/img/productSingle_small/8620.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8620.jpg" class="smallImage">
+                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8620.jpg" th:src="${goods.images1}" th:attr="bigImageURL=${goods.images1}" class="smallImage">
 
                 <img src="http://how2j.cn/tmall/img/productSingle_small/8619.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8619.jpg" class="smallImage">
+                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8619.jpg" th:src="${goods.images2}" th:attr="bigImageURL=${goods.images2}" class="smallImage">
 
                 <img src="http://how2j.cn/tmall/img/productSingle_small/8618.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8618.jpg" class="smallImage">
-
-                <img src="http://how2j.cn/tmall/img/productSingle_small/8617.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8617.jpg" class="smallImage">
-
-                <img src="http://how2j.cn/tmall/img/productSingle_small/8616.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8616.jpg" class="smallImage">
+                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8618.jpg" th:src="${goods.images3}" th:attr="bigImageURL=${goods.images3}" class="smallImage">
 
             </div>
             <div class="img4load hidden"></div>
         </div>
-
+        <!--/*@thymesVar id="seckill" type="org.seckill.entity.Seckill"*/-->
         <div class="infoInimgAndInfo">
 
-            <div class="productTitle">
+
+            <div class="productTitle" th:text="${goods.goodsprice+'元秒杀'+goods.goodsname}">
                 名媛2016新款女装夏两件套裤韩版雪纺七分裤阔腿裤休闲时尚套装女
             </div>
             <div class="productSubTitle">
-                高端定制 高档棉麻 现货即发 加购物车 领优惠卷
+                高端定制 极速秒杀 加购物车 领优惠卷
             </div>
 
             <div class="productPrice">
                 <div class="juhuasuan">
                     <span class="juhuasuanBig">聚划算</span>
-                    <span>此商品即将参加聚划算，<span class="juhuasuanTime">1天19小时</span>后开始，</span>
+                    <span>此商品即将开始秒杀，<span class="juhuasuanTime">1天19小时</span>后开始，</span>
                 </div>
                 <div class="productPriceDiv">
                     <div class="gouwujuanDiv"><img height="16px" src="http://how2j.cn/tmall/img/site/gouwujuan.png">
@@ -265,8 +260,7 @@
                     <div class="originalDiv">
                         <span class="originalPriceDesc">价格</span>
                         <span class="originalPriceYuan">¥</span>
-                        <span class="originalPrice">
-					
+                        <span class="originalPrice"  th:text="${goods.goodsprice}">
 						399.00					
 					</span>
                     </div>
@@ -306,7 +300,7 @@
 				</span>
 					
 			件</span>
-                <span>库存66件</span>
+                <span th:text="库存+${seckill.number}+件">库存66件</span>
             </div>
             <div class="serviceCommitment">
                 <span class="serviceCommitmentDesc">服务承诺</span>
@@ -739,7 +733,7 @@
 							<span class="loginInputIcon ">
 								<span class=" glyphicon glyphicon-lock"></span>
 							</span>
-                    <input id="password" name="password" type="password" placeholder="密码" type="text">
+                    <input id="password" name="password" type="password" placeholder="密码">
                 </div>
                 <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
                 <div>
@@ -770,105 +764,22 @@
     </div>
 </div>
 </div>
+<!--Cookie操作插件-->
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<!--倒计时插件-->
+<script src="https://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.js"></script>
+<script th:src="@{/resources/js/seckill.js}" src="/resources/js/seckill.js"></script>
 
-<div id="footer" class="footer" style="display: block;">
-
-    <div id="footer_ensure" class="footer_ensure">
-        <a href="#nowhere">
-            <img src="http://how2j.cn/tmall/img/site/ensure.png">
-        </a>
-    </div>
-
-    <div id="footer_desc" class="footer_desc">
-        <div class="descColumn">
-            <span class="descColumnTitle">购物指南</span>
-            <a href="#nowhere">免费注册</a>
-            <a href="#nowhere">开通支付宝</a>
-            <a href="#nowhere">支付宝充值</a>
-        </div>
-        <div class="descColumn">
-            <span class="descColumnTitle">天猫保障</span>
-            <a href="#nowhere">发票保障</a>
-            <a href="#nowhere">售后规则</a>
-            <a href="#nowhere">缺货赔付</a>
-        </div>
-        <div class="descColumn">
-            <span class="descColumnTitle">支付方式</span>
-            <a href="#nowhere">快捷支付</a>
-            <a href="#nowhere">信用卡</a>
-            <a href="#nowhere">蚂蚁花呗</a>
-            <a href="#nowhere">货到付款</a>
-        </div>
-        <div class="descColumn">
-            <span class="descColumnTitle">商家服务</span>
-            <a href="#nowhere">商家入驻</a>
-            <a href="#nowhere">商家中心</a>
-            <a href="#nowhere">天猫智库</a>
-            <a href="#nowhere">天猫规则</a>
-            <a href="#nowhere">物流服务</a>
-            <a href="#nowhere">喵言喵语</a>
-            <a href="#nowhere">运营服务</a>
-        </div>
-        <div class="descColumn">
-            <span class="descColumnTitle">手机天猫</span>
-            <a href="#nowhere"><img src="http://how2j.cn/tmall/img/site/ma.png"></a>
-        </div>
-
-    </div>
-
-    <div style="clear:both"></div>
-
-    <img id="cateye" class="cateye" src="http://how2j.cn/tmall/img/site/cateye.png">
-
-    <div id="copyright" class="copyright">
-        <div class="white_link">
-            <a href="#nowhere">关于天猫</a>
-            <a href="#nowhere"> 帮助中心</a>
-            <a href="#nowhere">开放平台</a>
-            <a href="#nowhere"> 诚聘英才</a>
-            <a href="#nowhere">联系我们</a>
-            <a href="#nowhere">网站合作</a>
-            <a href="#nowhere">法律声明</a>
-            <a href="#nowhere">知识产权</a>
-            <a href="#nowhere"> 廉正举报 </a>
-        </div>
-        <div class="white_link">
-            <a href="#nowhere"> 阿里巴巴集团</a><span class="slash">|</span>
-            <a href="#nowhere"> 淘宝网</a><span class="slash">|</span>
-            <a href="#nowhere">天猫 </a><span class="slash">|</span>
-            <a href="#nowhere"> 聚划算</a><span class="slash">|</span>
-            <a href="#nowhere">全球速卖通</a><span class="slash">|</span>
-            <a href="#nowhere">阿里巴巴国际交易市场</a><span class="slash">|</span>
-            <a href="#nowhere">1688</a><span class="slash">|</span>
-            <a href="#nowhere">阿里妈妈</a><span class="slash">|</span>
-            <a href="#nowhere"> 阿里旅行·去啊 </a><span class="slash">|</span>
-            <a href="#nowhere"> 阿里云计算 </a><span class="slash">|</span>
-            <a href="#nowhere"> 阿里通信 </a><span class="slash">|</span>
-            <a href="#nowhere"> YunOS </a><span class="slash">|</span>
-            <a href="#nowhere"> 阿里旅行·去啊 </a><span class="slash">|</span>
-            <a href="#nowhere"> 万网 </a><span class="slash">|</span>
-            <a href="#nowhere"> 高德 </a><span class="slash">|</span>
-            <a href="#nowhere"> 优视 </a><span class="slash">|</span>
-            <a href="#nowhere"> 友盟 </a><span class="slash">|</span>
-            <a href="#nowhere"> 虾米 </a><span class="slash">|</span>
-            <a href="#nowhere"> 天天动听 </a><span class="slash">|</span>
-            <a href="#nowhere"> 来往 </a><span class="slash">|</span>
-            <a href="#nowhere"> 钉钉 </a><span class="slash">|</span>
-            <a href="#nowhere"> 支付宝 </a>
-        </div>
-
-        <div class="license">
-            <span>增值电信业务经营许可证： 浙B2-20110446</span>
-            <span>网络文化经营许可证：浙网文[2015]0295-065号</span>
-            <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号 </span>
-            <span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span>
-            <div class="copyRightYear">© 2003-2016 TMALL.COM 版权所有</div>
-            <div>
-                <img src="http://how2j.cn/tmall/img/site/copyRight1.jpg">
-                <img src="http://how2j.cn/tmall/img/site/copyRight2.jpg">
-            </div>
-        </div>
-    </div>
+<script>
+    $(function () {
+        seckill.detail.init({
+            seckillId : [[${seckill.seckillId}]],
+            startTime : [[${seckill.startTime.time}]],
+            endTime   : [[${seckill.endTime.time}]]
+        })
+    })
+</script>
+<div th:replace="_fragment::footer" id="footer" class="footer" style="display: block;">
 </div>
 </body>
 </html>

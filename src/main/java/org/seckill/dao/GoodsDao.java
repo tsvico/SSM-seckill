@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface GoodsDao {
     List<Goods> findByAll();
+    Goods findById(long id);
 }

@@ -6,4 +6,7 @@
     <select id="findByAll" resultType="org.seckill.entity.Goods">
         SELECT * FROM `goodslist`;
     </select>
+    <select id="findById" resultType="org.seckill.entity.Goods">
+        SELECT * from goodslist WHERE goods_id = #{id}
+    </select>
 </mapper>

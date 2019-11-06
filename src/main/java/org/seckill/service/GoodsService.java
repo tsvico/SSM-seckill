@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface GoodsService {
     List<Goods> GetAllGoods();
+    Goods GetById(long id);
 }
