@@ -856,13 +856,13 @@ div.infoInimgAndInfo span.productNumberSettingSpan {
     display: inline-block;
     width: 43px;
     height: 32px;
-    padding: 7px 0;
+    /*padding: 7px 0;*/
 }
 
 div.infoInimgAndInfo input.productNumberSetting {
     border: 0px;
-    height: 80%;
-    width: 80%;
+    height: 100%;
+    width: 40px;
 }
 
 div.productNumber span.glyphicon {
@@ -1070,7 +1070,7 @@ div.buyPageDiv button {
 
 div.buyDiv button {
     display: inline-block;
-    margin: 0px 10px;
+    margin: 0 10px;
     width: 180px;
     height: 40px;
 }
@@ -1079,7 +1079,6 @@ button.buyButton {
     border: 1px solid #C40000;
     background-color: #FFEDED;
     text-align: center;
-    line-height: 40px;
     font-size: 16px;
 
     color: #C40000;
@@ -1090,13 +1089,16 @@ button.addCartButton {
     border: 1px solid #C40000;
     background-color: #C40000;
     text-align: center;
-    line-height: 40px;
     font-size: 16px;
 
     color: white;
     font-family: arial;
 }
-
+button.addCartButton.disabled{
+    border: unset;
+    background-color: #c29898;
+    opacity: .30;
+}
 button.addCartButton span.glyphicon {
     font-size: 12px;
     margin-right: 8px;
@@ -2268,4 +2270,7 @@ table.cartProductTable th.selectAndImage {
 
 table td {
     font-size: 12px;
+}
+.layui-layer{
+    top: 45% !important;
 }

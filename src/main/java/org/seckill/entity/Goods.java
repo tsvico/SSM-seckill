@@ -10,7 +10,8 @@ public class Goods {
     private long id;
     private long goodsid;
     private String goodsname;
-    private float goodsprice;
+    private float goodsorig; //原价
+    private float goodsseckillprice;//秒杀价
     private int chengjiao;
     private int goodsnumbers;
     private String images1;
@@ -41,12 +42,20 @@ public class Goods {
         this.goodsname = goodsname;
     }
 
-    public float getGoodsprice() {
-        return goodsprice;
+    public float getGoodsorig() {
+        return goodsorig;
     }
 
-    public void setGoodsprice(float goodsprice) {
-        this.goodsprice = goodsprice;
+    public void setGoodsorig(float goodsorig) {
+        this.goodsorig = goodsorig;
+    }
+
+    public float getGoodsseckillprice() {
+        return goodsseckillprice;
+    }
+
+    public void setGoodsseckillprice(float goodsseckillprice) {
+        this.goodsseckillprice = goodsseckillprice;
     }
 
     public int getChengjiao() {
@@ -95,7 +104,8 @@ public class Goods {
                 "id=" + id +
                 ", goodsid=" + goodsid +
                 ", goodsname='" + goodsname + '\'' +
-                ", goodsprice=" + goodsprice +
+                ", goodsorig=" + goodsorig +
+                ", goodsseckillprice=" + goodsseckillprice +
                 ", chengjiao=" + chengjiao +
                 ", goodsnumbers=" + goodsnumbers +
                 ", images1='" + images1 + '\'' +

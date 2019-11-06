@@ -2,7 +2,7 @@
 
 <head>
     <title th:text="${'秒杀'+goods.goodsname}">模仿天猫官网 名媛2016新款女装夏两件套裤韩版雪纺七分裤阔腿裤休闲时尚套装女</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
     <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
     <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
@@ -168,33 +168,6 @@
                 return false;
             });
 
-            $("button.loginSubmitButton").click(function () {
-                var name = $("#name").val();
-                var password = $("#password").val();
-
-                if (0 === name.length || 0 === password.length) {
-                    $("span.errorMessage").html("请输入账号密码");
-                    $("div.loginErrorMessageDiv").show();
-                    return false;
-                }
-
-                var page = "foreloginAjax";
-                if (false) $.get(
-                    page,
-                    {"name": name, "password": password},
-                    function (result) {
-                        if ("success" == result) {
-                            location.reload();
-                        } else {
-                            $("span.errorMessage").html("账号密码错误");
-                            $("div.loginErrorMessageDiv").show();
-                        }
-                    }
-                );
-
-                return true;
-            });
-
             $("img.smallImage").mouseenter(function () {
                 var bigImageURL = $(this).attr("bigImageURL");
                 $("img.bigImg").attr("src", bigImageURL);
@@ -225,13 +198,16 @@
             <img src="http://how2j.cn/tmall/img/productSingle/8620.jpg" th:src="${goods.images1}" class="bigImg">
             <div class="smallImageDiv">
                 <img src="http://how2j.cn/tmall/img/productSingle_small/8620.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8620.jpg" th:src="${goods.images1}" th:attr="bigImageURL=${goods.images1}" class="smallImage">
+                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8620.jpg" th:src="${goods.images1}"
+                     th:attr="bigImageURL=${goods.images1}" class="smallImage">
 
                 <img src="http://how2j.cn/tmall/img/productSingle_small/8619.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8619.jpg" th:src="${goods.images2}" th:attr="bigImageURL=${goods.images2}" class="smallImage">
+                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8619.jpg" th:src="${goods.images2}"
+                     th:attr="bigImageURL=${goods.images2}" class="smallImage">
 
                 <img src="http://how2j.cn/tmall/img/productSingle_small/8618.jpg"
-                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8618.jpg" th:src="${goods.images3}" th:attr="bigImageURL=${goods.images3}" class="smallImage">
+                     bigImageURL="http://how2j.cn/tmall/img/productSingle/8618.jpg" th:src="${goods.images3}"
+                     th:attr="bigImageURL=${goods.images3}" class="smallImage">
 
             </div>
             <div class="img4load hidden"></div>
@@ -240,7 +216,7 @@
         <div class="infoInimgAndInfo">
 
 
-            <div class="productTitle" th:text="${goods.goodsprice+'元秒杀'+goods.goodsname}">
+            <div class="productTitle" th:text="${goods.goodsseckillprice+'元秒杀'+goods.goodsname}">
                 名媛2016新款女装夏两件套裤韩版雪纺七分裤阔腿裤休闲时尚套装女
             </div>
             <div class="productSubTitle">
@@ -250,7 +226,7 @@
             <div class="productPrice">
                 <div class="juhuasuan">
                     <span class="juhuasuanBig">聚划算</span>
-                    <span>此商品即将开始秒杀，<span class="juhuasuanTime">1天19小时</span>后开始，</span>
+                    <span>此商品即将开始秒杀，<span class="juhuasuanTime"></span>后开始，</span>
                 </div>
                 <div class="productPriceDiv">
                     <div class="gouwujuanDiv"><img height="16px" src="http://how2j.cn/tmall/img/site/gouwujuan.png">
@@ -260,14 +236,14 @@
                     <div class="originalDiv">
                         <span class="originalPriceDesc">价格</span>
                         <span class="originalPriceYuan">¥</span>
-                        <span class="originalPrice"  th:text="${goods.goodsprice}">
-						399.00					
+                        <span class="originalPrice" th:text="${goods.goodsorig}">
+						8999.00
 					</span>
                     </div>
                     <div class="promotionDiv">
                         <span class="promotionPriceDesc">促销价 </span>
                         <span class="promotionPriceYuan">¥</span>
-                        <span class="promotionPrice">
+                        <span class="promotionPrice" th:text="${goods.goodsseckillprice}">
 						379.05
 					</span>
                     </div>
@@ -313,11 +289,12 @@
             </div>
 
             <div class="buyDiv">
-                <a class="buyLink" href="#nowhere">
-                    <button class="buyButton">立即购买</button>
+                <a class="buyLink">
+                    <button class="btn buyButton disabled">立即购买</button>
                 </a>
-                <a href="#nowhere" class="addCartLink">
-                    <button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
+                <a class="addCartLink">
+                    <button class="btn addCartButton disabled"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
+                    </button>
                 </a>
             </div>
         </div>
@@ -720,29 +697,30 @@
                         <span class="errorMessage"></span>
                     </div>
                 </div>
+                <form>
 
-                <div class="login_acount_text">账户登录</div>
-                <div class="loginInput ">
+                    <div class="login_acount_text">账户登录</div>
+                    <div class="loginInput ">
 							<span class="loginInputIcon ">
 								<span class=" glyphicon glyphicon-user"></span>
 							</span>
-                    <input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
-                </div>
+                        <input id="name" name="name" class="form-control" placeholder="手机/会员名/邮箱" type="text">
+                    </div>
 
-                <div class="loginInput ">
+                    <div class="loginInput ">
 							<span class="loginInputIcon ">
 								<span class=" glyphicon glyphicon-lock"></span>
 							</span>
-                    <input id="password" name="password" type="password" placeholder="密码">
-                </div>
-                <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
-                <div>
-                    <a href="#nowhere">忘记登录密码</a>
-                    <a href="#nowhere" class="pull-right">免费注册</a>
-                </div>
-                <div style="margin-top:20px">
-                    <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
-                </div>
+                        <input id="password" name="password" class="form-control" type="password" placeholder="密码">
+                    </div>
+                    <div>
+                        <a href="#nowhere">忘记登录密码</a>
+                        <a href="#nowhere" class="pull-right">免费注册</a>
+                    </div>
+                    <div style="margin-top:20px">
+                        <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -768,17 +746,18 @@
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <!--倒计时插件-->
 <script src="https://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.js"></script>
-<script th:src="@{/resources/js/seckill.js}" src="/resources/js/seckill.js"></script>
+<script th:src="@{/resources/js/seckill2.js}" src="/resources/js/seckill.js"></script>
 
 <script>
     $(function () {
         seckill.detail.init({
-            seckillId : [[${seckill.seckillId}]],
-            startTime : [[${seckill.startTime.time}]],
-            endTime   : [[${seckill.endTime.time}]]
-        })
+            seckillId: [[${seckill.seckillId}]],
+            startTime: [[${seckill.startTime.time}]],
+            endTime: [[${seckill.endTime.time}]]
+        });
     })
 </script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
 <div th:replace="_fragment::footer" id="footer" class="footer" style="display: block;">
 </div>
 </body>

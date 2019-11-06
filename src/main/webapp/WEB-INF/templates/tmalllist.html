@@ -125,13 +125,13 @@
         <div class="categoryProducts">
 
             <!--/*@thymesVar id="item" type="org.seckill.entity.Goods"*/-->
-            <div class="productUnit" th:attr="data-price=${item.goodsprice}" data-price="799.2"  th:each="item : ${lists}">
+            <div class="productUnit" th:attr="data-price=${item.goodsseckillprice}" data-price="799.2"  th:each="item : ${lists}">
                 <div class="productUnitFrame">
                     <a href="#" th:href="@{/{id}/detail2(id=${item.goodsid})}">
                         <img class="productImage" src="http://how2j.cn/tmall/img/productSingle_middle/7058.jpg" th:src="${item.images1}">
                     </a>
-                    <span class="productPrice" th:text="${item.goodsprice}">¥799.20</span>
-                    <a class="productLink" href="#" th:href="@{/{id}/detail2(id=${item.goodsid})}" th:text="${item.goodsprice}+'元秒杀'+${item.goodsname}">
+                    <span class="productPrice" th:text="${item.goodsseckillprice}">¥799.20</span>
+                    <a class="productLink" href="#" th:href="@{/{id}/detail2(id=${item.goodsid})}" th:text="${item.goodsseckillprice}+'元秒杀'+${item.goodsname}">
                         MAXFEEL休闲男士手包真皮手拿包大容量信封包手抓包夹包软韩版潮
                     </a>
 
