@@ -11,6 +11,9 @@ var seckill = {
         },
         execution: function (seckillId, md5) {
             return '/seckill/' + seckillId + "/" + md5 + '/execution';
+        },
+        login: function () {
+            return "/seckill/getUser";
         }
     },
     handleSeckillkill: function (seckillId, node) {
@@ -59,11 +62,11 @@ var seckill = {
                                             break;
                                     }
                                     node.html('<button class="btn ' + tempClass + '">' + stateInfo + '</button>'); //显示秒杀结果
-                                    if (state===1){
+                                    if (state === 1) {
                                         layer.msg("请稍后");
-                                        setTimeout(function(){
+                                        setTimeout(function () {
                                             location.href = "shopping";
-                                        },1000)
+                                        }, 1000)
                                     }
                                 } else {
                                     layer.msg(result.error);
@@ -121,47 +124,65 @@ var seckill = {
             seckill.handleSeckillkill(seckillId, seckillBox);
         }
     },
+    login: function(){
+        //未登录
+        var killPhoneModel = $('#loginModal');
+        killPhoneModel.modal({
+            show: true, //显示弹出层
+            backdrop: 'static', //禁止位置关闭
+            keyboard: false //关闭键盘事件
+        });
+        $('.loginSubmitButton').click(function () {
+            var name = $('#name').val();
+            var pwd = $('#password').val();
+            if (0 === name.length || 0 === pwd.length) {
+                $("span.errorMessage").html("请输入账号密码");
+                $("div.loginErrorMessageDiv").show();
+                return false;
+            }
+            let reg = /^\d+$/;
+            if (reg.test(name)) {
+                $.ajax({
+                    url: seckill.URL.login(),
+                    type: 'post',
+                    dataType: 'json',
+                    data: {username: name, password: pwd},
+                    success: function (res) {
+                        console.log(res,res.code,res.code===1,res.code==1);
+                        if (res.code==1){
+                            console.log(res.message);
+                            $("span.errorMessage").html("登录成功");
+                            $("div.loginErrorMessageDiv").show();
+                            //登陆成功
+                            layer.msg(res.message);
+                            //刷新页面
+                            setTimeout(function(){window.location.reload()},1000);
+                        }else{
+                            //登录失败
+                            $("span.errorMessage").html("账号或密码错误");
+                            $("div.loginErrorMessageDiv").show();
+                            return false;
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                        layer.msg(res.status);
+                        return false;
+                    }
+                });
+            } else {
+                $("span.errorMessage").html("账号格式不正确");
+                $("div.loginErrorMessageDiv").show();
+                return false;
+            }
+        });
+    },
     //详情页秒杀逻辑
     detail: {
         //详情页初始化
         init: function (params) {
             //手机验证和登录，计时交互
             //规划交互流程
-            //cookie‘中查询手机号
-            var killPhone = $.cookie("killname");
-
-            //验证手机号
-            console.log();
-            if (killPhone === undefined) {
-                //未登录
-                var killPhoneModel = $('#loginModal');
-                killPhoneModel.modal({
-                    show: true, //显示弹出层
-                    backdrop: 'static', //禁止位置关闭
-                    keyboard: false //关闭键盘事件
-                });
-                $('.loginSubmitButton').click(function () {
-                    var name = $('#name').val();
-                    var pwd = $('#password').val();
-                    if (0 === name.length || 0 === pwd.length) {
-                        $("span.errorMessage").html("请输入账号密码");
-                        $("div.loginErrorMessageDiv").show();
-                        return false;
-                    }
-                    let reg = /^\d+$/;
-                    if (reg.test(name)) {
-                        $.cookie('killname', name, {expires: 7, path: '/seckill'});
-                        $.cookie('killpwd', pwd, {expires: 7, path: '/seckill'});
-                        //刷新页面
-                        window.location.reload();
-                    } else {
-                        $("span.errorMessage").html("账号格式不正确");
-                        $("div.loginErrorMessageDiv").show();
-                        return false;
-                    }
-                });
-            }
-            //已经登录
             // 计时交互
             var startTime = params['startTime'];
             var endTime = params['endTime'];
@@ -172,9 +193,17 @@ var seckill = {
                 datatype: 'json',
                 success: function (res) {
                     if (res && res.success) {
-                        var nowTime = res.data;
-                        wc = new Date().getTime() - nowTime;
-                        seckill.countdown(seckillId, nowTime, startTime, endTime);
+                        //var nowTime = res.data;
+                        let data = res.data;
+                        if (data.isLogin) {
+                            //已经登录
+                            let nowTime = data.time;
+                            wc = new Date().getTime() - nowTime;
+                            seckill.countdown(seckillId, nowTime, startTime, endTime);
+                        } else {
+                            seckill.login();
+                            return false;
+                        }
                     }
                 }
             })

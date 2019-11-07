@@ -1,9 +1,11 @@
 package org.seckill.web;
 
+import com.alibaba.fastjson.JSONObject;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.dto.SeckillResult;
 import org.seckill.entity.Seckill;
+import org.seckill.entity.User;
 import org.seckill.enums.SeckillStatEnum;
 import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -72,10 +77,12 @@ public class SeckillController {
     public SeckillResult<SeckillExecution> execute(
             @PathVariable("seckillId") Long seckillId,
             @PathVariable("md5") String md5,
-            @CookieValue(value = "killname", required = false) Long phone) {
-        if (phone == null) {
-            return new SeckillResult<SeckillExecution>(false,"未注册");
+            @CookieValue(value = "killname", required = false) Long phone,HttpSession session) {
+       User user = (User)session.getAttribute("user");
+        if (user == null) {
+            return new SeckillResult<SeckillExecution>(false,"未登录");
         }
+        phone = user.getUserPhone();
         SeckillResult<SeckillExecution> result;
         try {
             //存储过程调用
@@ -96,8 +103,16 @@ public class SeckillController {
 
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)
     @ResponseBody
-    public SeckillResult<Long> time(){
+    public SeckillResult<JSONObject> time(HttpSession session){
         //Date now = new Date();
-        return new SeckillResult<Long>(true,System.currentTimeMillis());
+        JSONObject temp = new JSONObject();
+        User user = (User)session.getAttribute("user");
+        if (user!=null){
+            temp.put("isLogin",true);
+        }else {
+            temp.put("isLogin",false);
+        }
+        temp.put("time",System.currentTimeMillis());
+        return new SeckillResult<JSONObject>(true,temp);
     }
 }

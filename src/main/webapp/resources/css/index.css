@@ -2275,3 +2275,6 @@ table td {
 .layui-layer{
     top: 45% !important;
 }
+nav.top a span{
+    color: red;
+}

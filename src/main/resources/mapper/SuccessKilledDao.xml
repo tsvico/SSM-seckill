@@ -27,4 +27,7 @@
         inner join seckill s on sk.seckill_id = s.seckill_id
         where sk.seckill_id=#{seckillId} and sk.user_Phone = #{userPhone}
     </select>
+    <select id="getSeckillByIdandPhone" resultType="java.lang.Integer">
+        SELECT count(*) from success_kill WHERE user_phone=#{userPhone} and seckill_id=#{seckillId}
+    </select>
 </mapper>

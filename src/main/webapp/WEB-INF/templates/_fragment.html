@@ -6,10 +6,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入 Bootstrap -->
-
     <link href="https://libs.baidu.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-
-    <![endif]-->
+    <link rel="shortcut icon" th:href="@{/resources/img/favicon.ico}" href="/favicon.ico">
 </head>
 <body>
 <nav th:fragment="nav" class="top ">
@@ -20,7 +18,7 @@
 
     <span>喵，欢迎来天猫</span>
 
-    <a onclick="alert($(this).text())">tmalltest</a>
+    <a onclick="alert($(this).text())" th:utext="${session.user}==null?'<span>亲,请登录</span>':${session.user.userNickname}"><span style="color: #DD2727">亲,请登录</span></a>
     <a href="#nowhere">退出</a>
 
     <span class="pull-right">

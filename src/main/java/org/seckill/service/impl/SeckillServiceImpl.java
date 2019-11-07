@@ -1,7 +1,6 @@
 package org.seckill.service.impl;
 
 import org.apache.commons.collections.MapUtils;
-import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dao.cache.RedisDao;
@@ -184,5 +183,10 @@ public class SeckillServiceImpl implements SeckillService {
             logger.error(e.getMessage(), e);
             return new SeckillExecution(seckillId, SeckillStatEnum.INNER_ERROR);
         }
+    }
+
+    @Override
+    public int getSeckillByIdandPhone(long seckillId, long userPhone) {
+        return successKilledDao.getSeckillByIdandPhone(seckillId,userPhone);
     }
 }
