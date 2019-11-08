@@ -17,14 +17,19 @@ import redis.clients.jedis.JedisPool;
  */
 public class RedisDao {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //类似于数据库连接池
+    /**
+     * 类似于数据库连接池
+     */
     private JedisPool jedisPool;
 
     public RedisDao(String ip, int port) {
         jedisPool = new JedisPool(ip, port);
     }
 
-    //全局定义运行期Schema 使用protostuff 性能几乎没有损失
+
+    /**
+     * //全局定义运行期Schema 使用protostuff 性能几乎没有损失
+     */
     private RuntimeSchema<Seckill> schema = RuntimeSchema.createFrom(Seckill.class);
 
     public Seckill getSeckill(long seckillId) {
@@ -54,7 +59,11 @@ public class RedisDao {
         return null;
     }
 
-    //当缓存没有时
+    /**
+     * //当缓存没有时
+     * @param seckill
+     * @return
+     */
     public String putSeckill(Seckill seckill) {
         // set Object(seckill) -> 序列化  -> byte[]
         try{
@@ -65,9 +74,10 @@ public class RedisDao {
                 byte[] bytes = ProtostuffIOUtil.toByteArray(
                         seckill,schema, LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
                 //超时缓存
-                int timeout = 60*60; //单位秒 一小时
-                String result = jedis.setex(key.getBytes(), timeout, bytes);
-                return result; //正常返回ok，错误返回错误信息
+                // 单位秒 一小时
+                int timeout = 60*60;
+                //正常返回ok，错误返回错误信息
+                return jedis.setex(key.getBytes(), timeout, bytes);
             }finally {
                 jedis.close();
             }

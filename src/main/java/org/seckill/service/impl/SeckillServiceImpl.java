@@ -29,15 +29,13 @@ import java.util.Map;
  * @author tsvico
  * @email tsxygwj@gmail.com
  * @time 2019/10/21 10:19
- * 功能
+ * @ Component 所有的组件 在不知道是Service还是Dao时使用
  */
-//@Component 所有的组件 在不知道是Service还是Dao时使用
 @Service
 public class SeckillServiceImpl implements SeckillService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //注入依赖
     @Autowired
     private SeckillDao seckillDao;
 
@@ -46,8 +44,10 @@ public class SeckillServiceImpl implements SeckillService {
 
     @Autowired
     private RedisDao redisDao;
-
-    private final String slat = "22sarrw"; //混淆加盐
+    /**
+     *  混淆加盐
+     */
+    private final String slat = "22sarrw";
 
     @Override
     public List<Seckill> getSeckillList() {
@@ -87,15 +87,15 @@ public class SeckillServiceImpl implements SeckillService {
         Date startTime = seckill.getStartTime();
         Date endTime = seckill.getEndTime();
         //系统当前时间
-        Date nowTime = new Date();
-        //System.out.println(nowTime);
-        if (nowTime.getTime() < startTime.getTime() || nowTime.getTime() > endTime.getTime()) {
-            return new Exposer(false, seckillId, nowTime.getTime(), startTime.getTime(), endTime.getTime());
+        Long nowTime = System.currentTimeMillis();
+        if (nowTime < startTime.getTime() || nowTime > endTime.getTime()) {
+            return new Exposer(false, seckillId, nowTime, startTime.getTime(), endTime.getTime());
         }
         //库存判断
         if (seckill.getNumber()==0){
             return new Exposer(false, seckillId, false);
         }
+        nowTime = null;
         String md5 = getMd5(seckillId);
         return new Exposer(true, md5, seckillId);
     }
@@ -154,7 +154,7 @@ public class SeckillServiceImpl implements SeckillService {
             return new SeckillExecution(seckillId, SeckillStatEnum.DATA_REWRITE);
         }
         Date killTime = new Date();
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(10);
         map.put("seckillId", seckillId);
         map.put("phone", userPhone);
         map.put("killTime", killTime);
