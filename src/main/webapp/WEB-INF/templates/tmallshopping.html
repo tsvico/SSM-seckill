@@ -45,9 +45,9 @@
 				</tr>
 			</thead>
 			<tbody>
-					<tr oiid="977" class="cartProductItemTR">
+					<tr oiid="977" th:attr="oiid=${goods.goodsid}" class="cartProductItemTR">
 						<td>
-							<img selectit="false" oiid="977" class="cartProductItemIfSelected" src="http://how2j.cn/tmall/img/site/cartNotSelected.png">
+							<img selectit="false" oiid="977" th:attr="oiid=${goods.goodsid}" class="cartProductItemIfSelected" src="http://how2j.cn/tmall/img/site/cartNotSelected.png">
 							<a style="display:none" href="javascript:void(0);"><img src="http://how2j.cn/tmall/img/site/cartSelected.png"></a>
 							<img class="cartProductImg" th:src="${goods.images1}" src="http://how2j.cn/tmall/img/productSingle_middle/3752.jpg">
 						</td>
@@ -78,13 +78,13 @@
 						
 						 </td>
 						<td >
-							<span class="cartProductItemSmallSumPrice" oiid="977" pid="321" th:text="${'￥'+goods.goodsseckillprice}">
+							<span class="cartProductItemSmallSumPrice" oiid="977" th:attr="oiid=${goods.goodsid}" pid="321" th:text="${'￥'+goods.goodsseckillprice}">
 							￥4,940.00
 							</span>
 						
 						</td>
 						<td>
-							<a class="deleteOrderItem" oiid="977"  href="javascript:void(0);">删除</a>
+							<a class="deleteOrderItem" oiid="977" th:attr="oiid=${goods.goodsid}"  href="javascript:void(0);">删除</a>
 						</td>
 					</tr>
 								

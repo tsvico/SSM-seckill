@@ -3,10 +3,8 @@
 }
 
 body {
-    font-size: 12px;
-    font-family: Arial, serif;
     min-width: 1024px;
-
+    font: 12px/1.5 tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
 }
 
 a {
@@ -1064,7 +1062,7 @@ div.buyDiv {
 
 div.buyPageDiv button {
     display: inline-block;
-    margin: 0px 10px;
+    margin: 0 10px;
     width: 180px;
     height: 40px;
 }
@@ -1081,7 +1079,7 @@ button.buyButton {
     background-color: #FFEDED;
     text-align: center;
     font-size: 16px;
-
+    font-weight: bold;
     color: #C40000;
     font-family: arial;
 }

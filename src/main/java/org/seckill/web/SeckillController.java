@@ -48,8 +48,9 @@ public class SeckillController {
 
     @GetMapping("/{seckillId}/detail")
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
-        if (seckillId == null)
+        if (seckillId == null) {
             return "redirect:/list";
+        }
         Seckill seckill = seckillService.getById(seckillId);
         if (seckill == null) {
             return "forward:/list";

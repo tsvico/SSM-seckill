@@ -47,8 +47,9 @@ public class FirstController {
 
     @GetMapping("/{seckillId}/detail2")
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
-        if (seckillId == null)
+        if (seckillId == null) {
             return "redirect:/list2";
+        }
         Seckill seckill = seckillService.getById(seckillId);
         if (seckill == null) {
             return "forward:/list2";
@@ -60,8 +61,9 @@ public class FirstController {
     }
     @GetMapping("/{seckillId}/shopping")
     public String shoping(@PathVariable("seckillId") Long seckillId, Model model,HttpSession session) {
-        if (seckillId == null)
+        if (seckillId == null) {
             return "redirect:/list2";
+        }
         User user = (User)session.getAttribute("user");
         if (user!=null){
             int result = seckillService.getSeckillByIdandPhone(seckillId,user.getUserPhone());
@@ -83,7 +85,8 @@ public class FirstController {
                           HttpSession session){
         JSONObject jsonDate = new JSONObject();
         System.out.println(username+password);
-        User user = userService.checkUser(username, password); //校验密码
+        //校验密码
+        User user = userService.checkUser (username, password);
         if (user!=null){
             jsonDate.put("code",1);
             jsonDate.put("message","验证通过");

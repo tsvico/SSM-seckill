@@ -18,10 +18,10 @@ var seckill = {
     },
     handleSeckillkill: function (seckillId, node) {
         //处理秒杀逻辑
-        var urlNumber = Math.floor(Math.random() * 1000000 + 1);
+        var urlNumber = Math.floor(Math.random() * 10000000 + 1);
         node = node.parent(".buyLink");
         node.hide()
-            .html('<button class="btn buyButton" id="killBtn' + urlNumber + '">开始秒杀</button>');
+            .html('<button class="btn addCartButton" id="killBtn' + urlNumber + '">开始秒杀</button>');
         $.ajax({
             url: seckill.URL.exposer(seckillId),
             type: 'post',
@@ -140,16 +140,21 @@ var seckill = {
                 $("div.loginErrorMessageDiv").show();
                 return false;
             }
-            let reg = /^\d+$/;
+            let reg = /^[a-zA-Z0-9_-]{4,16}$/;
             if (reg.test(name)) {
+                layer.msg("登录中",{
+                    icon:16,
+                    time:-1
+                });
                 $.ajax({
                     url: seckill.URL.login(),
                     type: 'post',
                     dataType: 'json',
                     data: {username: name, password: pwd},
                     success: function (res) {
+                        layer.closeAll();
                         console.log(res,res.code,res.code===1,res.code==1);
-                        if (res.code==1){
+                        if (res.code===1){
                             console.log(res.message);
                             $("span.errorMessage").html("登录成功");
                             $("div.loginErrorMessageDiv").show();
@@ -165,13 +170,14 @@ var seckill = {
                         }
                     },
                     error: function (res) {
+                        layer.closeAll();
                         console.log(res);
                         layer.msg(res.status);
                         return false;
                     }
                 });
             } else {
-                $("span.errorMessage").html("账号格式不正确");
+                $("span.errorMessage").html("账号格式不正确(4到16位)");
                 $("div.loginErrorMessageDiv").show();
                 return false;
             }
