@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2019-10-30 16:09:00
+Date: 2019-10-30 16:09:00 秒杀相关数据库
 */
 
 SET FOREIGN_KEY_CHECKS=0;
