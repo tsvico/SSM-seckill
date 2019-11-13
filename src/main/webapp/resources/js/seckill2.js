@@ -16,6 +16,11 @@ var seckill = {
             return "/seckill/getUser";
         }
     },
+    state: {
+        getState: function () {
+            return JSON.parse(localStorage.getItem("islogin") || 'false');
+        },
+    },
     handleSeckillkill: function (seckillId, node) {
         //处理秒杀逻辑
         var urlNumber = Math.floor(Math.random() * 10000000 + 1);
@@ -135,9 +140,11 @@ var seckill = {
         $('.loginSubmitButton').click(function () {
             var name = $('#name').val();
             var pwd = $('#password').val();
+
             if (0 === name.length || 0 === pwd.length) {
                 $("span.errorMessage").html("请输入账号密码");
                 $("div.loginErrorMessageDiv").show();
+                localStorage.removeItem("islogin");
                 return false;
             }
             let reg = /^[a-zA-Z0-9_-]{4,16}$/;
@@ -150,7 +157,7 @@ var seckill = {
                     url: seckill.URL.login(),
                     type: 'post',
                     dataType: 'json',
-                    data: {username: name, password: pwd},
+                    data: {username: name, password: md5(pwd)},
                     success: function (res) {
                         layer.closeAll();
                         console.log(res,res.code,res.code===1,res.code==1);
@@ -158,6 +165,7 @@ var seckill = {
                             console.log(res.message);
                             $("span.errorMessage").html("登录成功");
                             $("div.loginErrorMessageDiv").show();
+                            localStorage.setItem("islogin", "true");
                             //登陆成功
                             layer.msg(res.message);
                             //刷新页面
@@ -166,6 +174,7 @@ var seckill = {
                             //登录失败
                             $("span.errorMessage").html("账号或密码错误");
                             $("div.loginErrorMessageDiv").show();
+                            localStorage.removeItem("islogin");
                             return false;
                         }
                     },
@@ -206,6 +215,7 @@ var seckill = {
                             let nowTime = data.time;
                             wc = new Date().getTime() - nowTime;
                             seckill.countdown(seckillId, nowTime, startTime, endTime);
+                            localStorage.setItem("islogin", "true");
                         } else {
                             seckill.login();
                             return false;

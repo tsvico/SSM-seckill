@@ -10,6 +10,7 @@ import org.seckill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +33,22 @@ public class FirstController {
     @Autowired
     private UserService userService;
 
+    private String slat = "sdafdewfwvgdvsavdw";
+    /**
+     * 根目录请求跳转
+     * @return
+     */
     @GetMapping("/")
     public String index(){
         //return "forward:list";
         return "redirect:list2";
     }
+
+    /**
+     * 购物商品列表页面
+     * @param model
+     * @return
+     */
     @GetMapping("/list2")
     public String list(Model model) {
         List<Goods> list = goodsService.GetAllGoods();
@@ -45,6 +57,12 @@ public class FirstController {
         return "tmalllist";
     }
 
+    /**
+     * 商品详情页面 detail2和detail页面不同
+     * @param seckillId
+     * @param model
+     * @return
+     */
     @GetMapping("/{seckillId}/detail2")
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
         if (seckillId == null) {
@@ -59,6 +77,14 @@ public class FirstController {
         model.addAttribute("seckill", seckill);
         return "tmalldetail";
     }
+
+    /**
+     * 购物车页面
+     * @param seckillId
+     * @param model
+     * @param session
+     * @return
+     */
     @GetMapping("/{seckillId}/shopping")
     public String shoping(@PathVariable("seckillId") Long seckillId, Model model,HttpSession session) {
         if (seckillId == null) {
@@ -78,6 +104,13 @@ public class FirstController {
         return "redirect:/list2";
     }
 
+    /**
+     * 登录请求接口
+     * @param username 用户名
+     * @param password 密码
+     * @param session session
+     * @return 登录结果json
+     */
     @RequestMapping(value = "/getUser",produces = " text/html;charset=UTF-8")
     @ResponseBody
     public String getUser(@RequestParam("username") String username,
@@ -86,7 +119,8 @@ public class FirstController {
         JSONObject jsonDate = new JSONObject();
         System.out.println(username+password);
         //校验密码
-        User user = userService.checkUser (username, password);
+        User user = userService.checkUser(username, md5(password));
+        System.out.println(md5(password));
         if (user!=null){
             jsonDate.put("code",1);
             jsonDate.put("message","验证通过");
@@ -97,5 +131,10 @@ public class FirstController {
             jsonDate.put("message","用户名或者密码错误");
         }
         return jsonDate.toJSONString();
+    }
+
+    private String md5(String s) {
+        String base = s + "/" + slat;
+        return DigestUtils.md5DigestAsHex(base.getBytes());
     }
 }

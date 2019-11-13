@@ -28,7 +28,6 @@ import java.util.Map;
  * @author tsvico
  * @email tsxygwj@gmail.com
  * @time 2019/10/28 10:00
- * 功能
  */
 @Controller
 public class SeckillController {
@@ -38,6 +37,11 @@ public class SeckillController {
     @Autowired
     private SeckillService seckillService;
 
+    /**
+     * 未整合前的列表页
+     * @param model
+     * @return
+     */
    @GetMapping("/list")
     public String list(Model model) {
         List<Seckill> list = seckillService.getSeckillList();
@@ -46,6 +50,12 @@ public class SeckillController {
         return "list";
     }
 
+    /**
+     * 未整合前的详情页
+     * @param seckillId 商品ID
+     * @param model 前端数据
+     * @return HTML模板页
+     */
     @GetMapping("/{seckillId}/detail")
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
         if (seckillId == null) {
