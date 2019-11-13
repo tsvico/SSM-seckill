@@ -137,4 +137,10 @@ public class FirstController {
         String base = s + "/" + slat;
         return DigestUtils.md5DigestAsHex(base.getBytes());
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/list2";
+    }
 }

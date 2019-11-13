@@ -7,7 +7,18 @@
 	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" th:href="@{/resources/css/index.css}" href="../../resources/css/index.css">
 	<script th:src="@{/resources/js/index.js}" src="../../resources/js/index.js"></script>
-
+	<script>
+		var config = {
+			cartSelected_png: function () {
+				//https://how2j.cn/tmall/img/site/cartSelected.png
+				return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAANCAYAAAB2HjRBAAABWklEQVQ4EY2RTyiDcRjHP9Ost0YclouZnJQ/JyWy45IdcFlRK9wopRay5bJGhhInbk6bnBzkoiTFVpQSObwHlr9zeFPKYWn89O717t2a1ftcft/neb5/nvpZZFkWiqJgphqeHnCcrFM5s4bV2QiJREKYqu+sEJMdQngQolcSIhYSFWYSc5z4AsiXGv0nA/ZqzInvrmAnYuSMhcDrLxC/3UPm0yDo6CsDSyOQFblJunsIfBM5rCU/yxBww/xgqUEsDI83mpXHT6pvSrf9S94MgJKG62MIeg0D+QJ2VzRyzwBMb+eFKtCSw3vg8WuL2zPN4P0VosOgXtvWCcE4WG3/iG0SzMVgfBUsgGow2gIvKXC1w+IhSFVFQiNZH/tmIbIPUg1kPqC+CaIHYK/VGUVv6Vd19cPWObS6YfkI6lxFgsLGWtjksbMZNk7zbTlgdTgcJJPJcvuSucrX6xcDoYihVMO4YAAAAABJRU5ErkJggg==";
+			},
+			cartNotSelected_png: function () {
+				//https://how2j.cn/tmall/img/site/cartNotSelected.png
+				return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAANCAYAAAB2HjRBAAAAQklEQVQ4EWO8efPm/zdv3jAQC0RERBjU1dUZweqPHj36nxQAUg+ziAnGIIce1UxiqI3EAGMBpdVjx44RHVQg9TAAAC9HPFRFxow6AAAAAElFTkSuQmCC";
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -198,12 +209,12 @@
 		$("img.cartProductItemIfSelected").click(function(){
 			var selectit = $(this).attr("selectit");
 			if("selectit"==selectit){
-				$(this).attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+				$(this).attr("src",config.cartNotSelected_png());
 				$(this).attr("selectit","false");
 				$(this).parents("tr.cartProductItemTR").css("background-color","#fff");
 			}
 			else{
-				$(this).attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+				$(this).attr("src",config.cartSelected_png());
 				$(this).attr("selectit","selectit");
 				$(this).parents("tr.cartProductItemTR").css("background-color","#FFF8E1");
 			}
@@ -214,19 +225,19 @@
 		$("img.selectAllItem").click(function(){
 			var selectit = $(this).attr("selectit");
 			if("selectit"==selectit){
-				$("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+				$("img.selectAllItem").attr("src",config.cartNotSelected_png());
 				$("img.selectAllItem").attr("selectit","false");
 				$(".cartProductItemIfSelected").each(function(){
-					$(this).attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+					$(this).attr("src",config.cartNotSelected_png());
 					$(this).attr("selectit","false");
 					$(this).parents("tr.cartProductItemTR").css("background-color","#fff");
 				});
 			}
 			else{
-				$("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+				$("img.selectAllItem").attr("src",config.cartSelected_png());
 				$("img.selectAllItem").attr("selectit","selectit");
 				$(".cartProductItemIfSelected").each(function(){
-					$(this).attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+					$(this).attr("src",config.cartSelected_png());
 					$(this).attr("selectit","selectit");
 					$(this).parents("tr.cartProductItemTR").css("background-color","#FFF8E1");
 				});
@@ -294,9 +305,9 @@
 		});
 
 		if(selectAll)
-			$("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+			$("img.selectAllItem").attr("src",config.cartSelected_png());
 		else
-			$("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+			$("img.selectAllItem").attr("src",config.cartNotSelected_png());
 
 	}
 	function calcCartSumPriceAndNumber(){

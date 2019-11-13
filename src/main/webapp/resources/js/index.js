@@ -42,7 +42,6 @@ $(function () {
         $("div.orderItemSumDiv").css("height", "100px");
     });
 
-
     $("span.wangwanglink").click(function () {
         alert("模仿旺旺的图标，并不会打开旺旺");
     });

@@ -11,21 +11,21 @@
 </head>
 <body>
 <nav th:fragment="nav" class="top ">
-    <a href="/seckill">
+    <a href="/" th:href="@{/}">
         <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon glyphicon-home redColor"></span>
-        天猫首页
+        秒杀首页
     </a>
 
-    <span>喵，欢迎来天猫</span>
+    <span>喵，欢迎来秒杀眨眼没</span>
 
     <a onclick="alert($(this).text())" th:utext="${session.user}==null?'<span>亲,请登录</span>':${session.user.userNickname}"><span style="color: #DD2727">亲,请登录</span></a>
-    <a href="#nowhere">退出</a>
+    <a href="/logout" th:href="@{/logout}">退出</a>
 
     <span class="pull-right">
 			<a href="#nowhere">我的订单</a>
 			<a href="#nowhere">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
-			购物车<strong>5</strong>件</a>
+			购物车<strong>0</strong>件</a>
 		</span>
 
 </nav>
