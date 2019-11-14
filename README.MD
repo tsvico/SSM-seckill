@@ -75,4 +75,11 @@ var killTime = new Date(startTime + wc); //加1秒，防止计时过程中时间
 if (seckill.getNumber()==0){
     return new Exposer(false, seckillId, false);
 }
+/*
+ * 更新redis缓存中库存数量
+ */
+Seckill seckill = redisDao.getSeckill(seckillId);
+seckill.setNumber(seckill.getNumber()-1);
+redisDao.putSeckill(seckill);
+
 ```
