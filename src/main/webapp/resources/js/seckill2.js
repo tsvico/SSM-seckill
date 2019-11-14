@@ -27,6 +27,13 @@ var seckill = {
         node = node.parent(".buyLink");
         node.hide()
             .html('<button class="btn addCartButton" id="killBtn' + urlNumber + '">开始秒杀</button>');
+        //只允许第一个提交的订单被发送到订单子系统
+        console.log(210,seckillId,$.cookie(""+seckillId)||false);
+        if($.cookie(""+seckillId)||false){
+            node.html('<button class="btn btn-success">秒杀成功</button>');
+            node.show();
+            return;
+        }
         $.ajax({
             url: seckill.URL.exposer(seckillId),
             type: 'post',
@@ -70,6 +77,7 @@ var seckill = {
                                     if (state === 1) {
                                         layer.msg("请稍后");
                                         setTimeout(function () {
+                                            $.cookie(seckillId,1);
                                             location.href = "shopping";
                                         }, 1000)
                                     }
@@ -160,7 +168,6 @@ var seckill = {
                     data: {username: name, password: md5(pwd)},
                     success: function (res) {
                         layer.closeAll();
-                        console.log(res,res.code,res.code===1,res.code==1);
                         if (res.code===1){
                             console.log(res.message);
                             $("span.errorMessage").html("登录成功");

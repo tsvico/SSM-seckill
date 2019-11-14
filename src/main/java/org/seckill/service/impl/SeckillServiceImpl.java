@@ -117,7 +117,7 @@ public class SeckillServiceImpl implements SeckillService {
         if (md5 == null || !md5.equals(getMd5(seckillId))) {
             throw new SeckillException("seckill data rewrite");
         }
-        //执行秒杀逻辑 : 减库存+记录购买行为
+        //执行秒杀逻辑 : 减库存 + 记录购买行为
         Date nowTime = new Date();
         try {
             //减库存成功 记录购买行为
