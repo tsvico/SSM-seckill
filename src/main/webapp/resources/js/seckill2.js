@@ -30,7 +30,7 @@ var seckill = {
         //只允许第一个提交的订单被发送到订单子系统
         console.log(210,seckillId,$.cookie(""+seckillId)||false);
         if($.cookie(""+seckillId)||false){
-            node.html('<button class="btn btn-success">秒杀成功</button>');
+            node.html('<button class="btn btn-success">已秒杀成功</button>');
             node.show();
             return;
         }
@@ -166,7 +166,7 @@ var seckill = {
                     type: 'post',
                     dataType: 'json',
                     data: {username: name, password: md5(pwd)},
-                    success: function (res) {
+                   success: function (res) {
                         layer.closeAll();
                         if (res.code===1){
                             console.log(res.message);

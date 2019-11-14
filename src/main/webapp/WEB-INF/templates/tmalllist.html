@@ -14,53 +14,7 @@
 
 <nav th:replace="_fragment::nav" class="top "></nav>
 
-<a href="/">
-    <img id="logo" src="http://how2j.cn/tmall/img/site/logo.gif" class="logo">
-</a>
-
-<form method="post">
-    <div class="searchDiv">
-        <input name="keyword" type="text" placeholder="时尚男鞋  太阳镜 ">
-        <button type="button" class="searchButton">搜索</button>
-        <div class="searchBelow">
-				
-						<span>
-							<a href="#">
-								平衡车
-							</a>
-											
-								<span>|</span>				
-							
-						</span>
-
-            <span>
-							<a href="#">
-								扫地机器人 
-							</a>
-											
-								<span>|</span>				
-							
-						</span>
-
-            <span>
-							<a href="#">
-								原汁机
-							</a>
-											
-								<span>|</span>				
-							
-						</span>
-
-            <span>
-							<a href="#">
-								冰箱
-							</a>
-							
-						</span>
-
-        </div>
-    </div>
-</form>
+<div th:replace="_fragment::search"></div>
 
 <div id="category">
     <div class="categoryPageDiv">

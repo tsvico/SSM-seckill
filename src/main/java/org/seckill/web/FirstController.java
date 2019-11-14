@@ -53,7 +53,7 @@ public class FirstController {
     public String list(Model model) {
         List<Goods> list = goodsService.GetAllGoods();
         model.addAttribute("lists", list);
-        System.out.println("请求List");
+        System.out.println("请求List".hashCode());
         return "tmalllist";
     }
 
