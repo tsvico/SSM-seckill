@@ -2,7 +2,8 @@
 ![](https://i.loli.net/2019/10/24/Q2uTtFRaLGvC9bn.png)
 
 ### Restful 示例
-![](https://i.loli.net/2019/10/24/SjpZbfyD8mzFPQA.png)
+
+<img src="https://i.loli.net/2019/10/24/SjpZbfyD8mzFPQA.png" width="50%" align=center alt="Restful接口">
 
 ![](https://i.loli.net/2019/10/24/iGeayd9K24sqVjt.png)
 
@@ -20,7 +21,7 @@
 ![](https://i.loli.net/2019/11/01/ERcVNnuGdW2TLMq.png)
 
 ![](https://i.loli.net/2019/11/01/kylVrapAeSZ4xut.png)
- 
+
 参考文章[参考文章](README_test.md)
 
 细节优化

@@ -81,7 +81,7 @@
 
             <!--/*@thymesVar id="item" type="org.seckill.entity.Goods"*/-->
             <div class="productUnit" th:attr="data-price=${item.goodsseckillprice}" data-price="799.2"  th:each="item : ${lists}">
-                <div class="productUnitFrame">
+                <div class="productUnitFrame" th:title="${item.goodsname}">
                     <a href="#" th:href="@{/{id}/detail2(id=${item.goodsid})}">
                         <img class="productImage" src="http://how2j.cn/tmall/img/productSingle_middle/7058.jpg" th:src="${item.images1}">
                     </a>
