@@ -98,7 +98,7 @@ var seckill = {
                             seckill.countdown(seckillId, now, start, end);
                         } else {
                             //库存为0
-                            node.html('秒杀结束'); //显示秒杀结果
+                            node.html('<button class="btn addCartButton disabled">秒杀结束</button>'); //显示秒杀结果
                             node.show();
                         }
                     }

@@ -175,6 +175,9 @@
 	var deleteOrderItemid = 0;
 	$(function(){
 
+		$('.numberPlus').click(function () {
+			layer.msg("秒杀商品只可购买一件");
+		});
 		$("a.deleteOrderItem").click(function(){
 			deleteOrderItem = false;
 			var oiid = $(this).attr("oiid");
@@ -350,6 +353,7 @@
 
 	}
 </script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
 <div id="footer" th:replace="_fragment::footer" class="footer" style="display: block;">
 </div>
 </body>
