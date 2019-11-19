@@ -178,6 +178,9 @@
 		$('.numberPlus').click(function () {
 			layer.msg("秒杀商品只可购买一件");
 		});
+		$('.numberMinus').click(function () {
+			layer.msg("秒杀商品数量不可为0");
+		});
 		$("a.deleteOrderItem").click(function(){
 			deleteOrderItem = false;
 			var oiid = $(this).attr("oiid");
