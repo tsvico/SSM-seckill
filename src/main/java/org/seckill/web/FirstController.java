@@ -107,7 +107,7 @@ public class FirstController {
     /**
      * 登录请求接口
      * @param username 用户名
-     * @param password 密码
+     * @param password 密码 双层MD5  此处可加salt
      * @param session session
      * @return 登录结果json
      */
